@@ -8,6 +8,8 @@ TEST_DATA = [
         {'query': 'africa', 'pid': 'bdr:41266', 'lowest_ranking': 5},
         {'query': 'linux', 'pid': 'bdr:386312', 'lowest_ranking': 5},
         {'query': 'abraham lincoln', 'pid': 'bdr:75649', 'lowest_ranking': 5},
+        {'query': 'Trodadéro', 'pid': 'bdr:87005', 'lowest_ranking': 5},
+        {'query': 'Trodadero', 'pid': 'bdr:87005', 'lowest_ranking': 5},
     ]
 
 SOLR_URL = os.environ['SOLR_URL']
