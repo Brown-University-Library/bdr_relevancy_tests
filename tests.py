@@ -23,15 +23,20 @@ def escape_solr_special_chars(s):
 
 class RelevancyTests(unittest.TestCase):
 
+    def _get_solr_results(self, query, rows=10):
+        query = escape_solr_special_chars(query)
+        perms_query = f'discover:{BDR_PUBLIC}'
+        r = requests.get(f'{SOLR_URL}select/?q={query}&fq={perms_query}&fl=pid&wt=json&rows={rows}')
+        if not r.ok:
+            raise Exception(f'{r.status_code} - {r.content.decode("utf8")} - {query}')
+        results = r.json()
+        return results
+
     def test_queries(self):
         for row in TEST_DATA:
             with self.subTest(row=row):
-                query = escape_solr_special_chars(row['query'])
-                solr_query = f'discover:{BDR_PUBLIC} AND {query}'
-                r = requests.get(f'{SOLR_URL}select/?q={solr_query}&fl=pid&wt=json&rows={row["lowest_ranking"]}')
-                if not r.ok:
-                    raise Exception(f'{r.status_code} - {r.content.decode("utf8")} - {query}')
-                results = r.json()
+                query = row['query']
+                results = self._get_solr_results(query, rows=row['lowest_ranking'])
                 pids = [d['pid'] for d in results['response']['docs']]
                 pid = row['pid']
                 self.assertTrue(pid in pids, f'{pid} not in {pids} (query: "{query}")')
