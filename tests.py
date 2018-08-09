@@ -41,6 +41,15 @@ class RelevancyTests(unittest.TestCase):
                 pid = row['pid']
                 self.assertTrue(pid in pids, f'{pid} not in {pids} (query: "{query}")')
 
+    def test_more_words_narrow_the_results(self):
+        '''If q.op is 'OR', then more terms widen the results - it's a union of results for all the terms.
+        If q.op is 'AND', then more terms narrow the results - it's an intersection of results.'''
+        query1 = 'africa'
+        query2 = 'africa french soldiers'
+        results1 = self._get_solr_results(query1)
+        results2 = self._get_solr_results(query2)
+        self.assertGreater(results1['response']['numFound'], results2['response']['numFound'])
+
 
 if __name__ == '__main__':
     unittest.main()
