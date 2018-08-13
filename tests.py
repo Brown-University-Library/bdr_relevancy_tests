@@ -23,22 +23,23 @@ def escape_solr_special_chars(s):
     return s
 
 
-class RelevancyTests(unittest.TestCase):
+def get_solr_results(query, rows=10):
+    query = escape_solr_special_chars(query)
+    perms_query = f'discover:{BDR_PUBLIC}'
+    r = requests.get(f'{SOLR_URL}select/?q={query}&fq={perms_query}&fl=pid&wt=json&rows={rows}')
+    if not r.ok:
+        raise Exception(f'{r.status_code} - {r.content.decode("utf8")} - {query}')
+    results = r.json()
+    return results
 
-    def _get_solr_results(self, query, rows=10):
-        query = escape_solr_special_chars(query)
-        perms_query = f'discover:{BDR_PUBLIC}'
-        r = requests.get(f'{SOLR_URL}select/?q={query}&fq={perms_query}&fl=pid&wt=json&rows={rows}')
-        if not r.ok:
-            raise Exception(f'{r.status_code} - {r.content.decode("utf8")} - {query}')
-        results = r.json()
-        return results
+
+class RelevancyTests(unittest.TestCase):
 
     def test_queries(self):
         for row in TEST_DATA:
             with self.subTest(row=row):
                 query = row['query']
-                results = self._get_solr_results(query, rows=row['lowest_ranking'])
+                results = get_solr_results(query, rows=row['lowest_ranking'])
                 pids = [d['pid'] for d in results['response']['docs']]
                 pid = row['pid']
                 self.assertTrue(pid in pids, f'{pid} not in {pids} (query: "{query}")')
@@ -48,8 +49,8 @@ class RelevancyTests(unittest.TestCase):
         If q.op is 'AND', then more terms narrow the results - it's an intersection of results.'''
         query1 = 'africa'
         query2 = 'africa french soldiers'
-        results1 = self._get_solr_results(query1)
-        results2 = self._get_solr_results(query2)
+        results1 = get_solr_results(query1)
+        results2 = get_solr_results(query2)
         self.assertGreater(results1['response']['numFound'], results2['response']['numFound'])
 
 
