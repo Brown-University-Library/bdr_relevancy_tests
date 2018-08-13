@@ -7,7 +7,9 @@ from tests import SOLR_URL, BDR_PUBLIC, escape_solr_special_chars, get_solr_resu
 TEST_DATA = [
         {'query': 'test:1125', 'pid': 'test:1125', 'lowest_ranking': 1},
         {'query': 'Cörper', 'pid': 'test:231377', 'lowest_ranking': 2},
+        {'query': 'cörper', 'pid': 'test:231377', 'lowest_ranking': 2},
         {'query': 'Corper', 'pid': 'test:231377', 'lowest_ranking': 2},
+        {'query': 'corper', 'pid': 'test:231377', 'lowest_ranking': 2},
     ]
 
 
