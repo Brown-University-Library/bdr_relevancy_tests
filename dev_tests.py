@@ -10,6 +10,8 @@ TEST_DATA = [
         {'query': 'cörper', 'pid': 'test:231377', 'lowest_ranking': 2},
         {'query': 'Corper', 'pid': 'test:231377', 'lowest_ranking': 2},
         {'query': 'corper', 'pid': 'test:231377', 'lowest_ranking': 2},
+        {'query': 'sampt beygefügter', 'pid': 'test:231377', 'lowest_ranking': 1},
+        {'query': 'sampt beygefugter', 'pid': 'test:231377', 'lowest_ranking': 1},
     ]
 
 
