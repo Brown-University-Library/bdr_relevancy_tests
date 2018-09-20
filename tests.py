@@ -13,6 +13,9 @@ TEST_DATA = [
         {'query': 'Trodadero', 'pid': 'bdr:87005', 'lowest_ranking': 5},
         {'query': 'trodadero', 'pid': 'bdr:87005', 'lowest_ranking': 5},
         {'query': 'decidement nos neveux', 'pid': 'bdr:86119', 'lowest_ranking': 2},
+        {'query': '1327442751671876', 'pid': 'bdr:57531', 'lowest_ranking': 1}, #METS ID
+        {'query': 'askb00000030241', 'pid': 'bdr:403473', 'lowest_ranking': 1}, #MODS ID
+        {'query': 'U-P 1917-1918 g', 'pid': 'bdr:244774', 'lowest_ranking': 1}, #ASKB Call No.
     ]
 
 SOLR_URL = os.environ['SOLR_URL']
