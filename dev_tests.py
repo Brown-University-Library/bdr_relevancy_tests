@@ -13,6 +13,8 @@ TEST_DATA = [
         {'query': 'corper', 'pid': 'test:231377', 'lowest_ranking': 2},
         {'query': 'sampt beygefügter', 'pid': 'test:231377', 'lowest_ranking': 1},
         {'query': 'sampt beygefugter', 'pid': 'test:231377', 'lowest_ranking': 1},
+        {'query': 'BETH0040', 'pid': 'test:233677', 'lowest_ranking': 1},
+        {'query': 'beth0040', 'pid': 'test:233677', 'lowest_ranking': 1},
         {'query': '111780829541025', 'pid': 'test:229775', 'lowest_ranking': 1}, #METS ID
         {'query': 'askb013692', 'pid': 'test:224428', 'lowest_ranking': 1}, #MODS ID
         {'query': 'Au-MP 1847 lf-1', 'pid': 'test:224428', 'lowest_ranking': 1}, #ASKB Call No.
