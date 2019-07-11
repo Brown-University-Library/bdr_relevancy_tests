@@ -34,7 +34,7 @@ def escape_solr_special_chars(s):
 def get_solr_results(query, rows=10):
     query = escape_solr_special_chars(query)
     perms_query = f'discover:{BDR_PUBLIC}'
-    r = requests.get(f'{SOLR_URL}select/?q={query}&fq={perms_query}&fl=pid&wt=json&rows={rows}')
+    r = requests.get(f'{SOLR_URL}select/?q={query}&fq={perms_query}&fl=pid&wt=json&rows={rows}&sort=score+desc')
     if not r.ok:
         raise Exception(f'{r.status_code} - {r.content.decode("utf8")} - {query}')
     results = r.json()
