@@ -16,6 +16,7 @@ TEST_DATA = [
         {'query': 'BETH0040', 'pid': 'test:233677', 'lowest_ranking': 1},
         {'query': 'beth0040', 'pid': 'test:233677', 'lowest_ranking': 1},
         {'query': 'openbsd', 'pid': 'test:233875', 'lowest_ranking': 1}, #verify title boost
+        {'query': 'law', 'pid': 'changeme:22', 'lowest_ranking': 10}, #verify extracted text search
         {'query': '111780829541025', 'pid': 'test:229775', 'lowest_ranking': 1}, #METS ID
         {'query': 'askb013692', 'pid': 'test:224428', 'lowest_ranking': 1}, #MODS ID
         {'query': 'Au-MP 1847 lf-1', 'pid': 'test:224428', 'lowest_ranking': 1}, #ASKB Call No.
